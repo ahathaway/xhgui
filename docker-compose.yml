@@ -4,7 +4,7 @@ services:
   xhgui:
     # https://hub.docker.com/r/xhgui/xhgui/tags
     image: xhgui/xhgui:latest
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./config:/var/www/xhgui/config
       - ./nginx.conf:/etc/nginx/http.d/default.conf:ro
@@ -18,7 +18,7 @@ services:
     image: percona/percona-server-mongodb:3.6
     # (case sensitive) engine: mmapv1, rocksdb, wiredTiger, inMemory
     command: --storageEngine=wiredTiger
-    restart: always
+    restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=xhprof
     volumes:
